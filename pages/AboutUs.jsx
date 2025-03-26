@@ -157,10 +157,7 @@ const AboutUs = () => {
                 Our Commitment to Excellence
               </Typography>
               <Typography variant="body1" color="text.secondary">
-              The Ace Luxe is built upon the foundation of trust, quality, and innovation. Whether it’s our penthouse suites, fine-dining restaurants, hotel apartments, or business centers, every aspect of our hospitality ventures is meticulously crafted to offer an unmatched experience.
-<br /> <br /><b color="text.secondary">Looking Ahead: </b>
-With the grand launch of Riverwalk Luxury Apartments’ penthouse accommodation and restaurants in April 2025, followed by our Hotel Apartments and Business Center at Zameen Ace Mall in DHA Phase 2, Islamabad, we are setting new standards in luxury living and hospitality.
-<br /><br />Join us on this journey as we bring unparalleled elegance and comfort to hospitality in Pakistan. <br /> Welcome to <b>The Ace Luxe</b> – where luxury meets legacy.
+                The Ace Luxe is built upon the foundation of trust, quality, and innovation. Whether it’s our penthouse suites, fine-dining restaurants, hotel apartments, or business centers, every aspect of our hospitality ventures is meticulously crafted to offer an unmatched experience.
               </Typography>
             </CardContent>
           </Card>

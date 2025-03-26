@@ -6,7 +6,8 @@ import project1 from "../src/assets/project1.png";
 import project2 from "../src/assets/project2.png";
 import project3 from "../src/assets/project3.png";
 import project4 from "../src/assets/project4.png";
-import project5 from "../src/assets/project5.png";
+import project5 from "../src/assets/apartments.jpg";
+import project6 from "../src/assets/riverwalk.jpeg";
 
 // import { useLocation } from "react-router-dom";
 
@@ -45,6 +46,13 @@ const projects = [
     location: "Murree",
     description: "Nestled in the scenic hills of Murree, our serviced apartments provide a luxurious yet cozy stay for vacationers and long-term residents, offering breathtaking views and premium facilities.",
     image: project5,
+  },
+  {
+    id: "riverwalk-luxury-apartments",
+    title: "Riverwalk Luxury Apartments",
+    location: "Twin Cities",
+    description: "Nestled within one of our finest residential projects, Riverwalk Luxury Apartments, we have crafted a unique hospitality experience. These apartments are designed to offer a blend of comfort and elegance, ensuring that every guest enjoys a memorable stay.",
+    image: project6,
   },
 ];
 

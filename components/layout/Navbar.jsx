@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { motion } from "framer-motion";
-import logo from "../../src/assets/logo.png";
+import logo from "../../src/assets/logo1.jpeg";
 import { useNavigate } from "react-router-dom";
 
 const pages = [

@@ -9,10 +9,11 @@ import project1 from "../src/assets/project1.png";
 import project2 from "../src/assets/project2.png";
 import project3 from "../src/assets/project3.png";
 import project4 from "../src/assets/project4.png";
-import project5 from "../src/assets/project5.png";
-import service1 from "../src/assets/service1.png";
-import service2 from "../src/assets/service2.png";
-import service3 from "../src/assets/service3.png";
+import project5 from "../src/assets/apartments.jpg";
+import project6 from "../src/assets/riverwalk.jpeg";
+import service1 from "../src/assets/hospitality.jpeg";
+import service2 from "../src/assets/resandcom.jpeg";
+import service3 from "../src/assets/remodling.jpeg";
 import homebg from "../src/assets/homebg.png";
 
 const projects = [
@@ -21,6 +22,7 @@ const projects = [
   { id: "dha-villas", title: "DHA Islamabad Villas", image: project1 },
   { id: "e11-villas", title: "E-11 Villas", image: project3 },
   { id: "serviced-apartments", title: "Serviced Apartments", image: project5 },
+  { id: "riverwalk-luxury-apartments", title: "Riverwalk Luxury Apartments", image: project6 },
 ];
 
 const responsive = {
@@ -56,16 +58,20 @@ const LandingPage = () => {
         <Container backgroundColor="black">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
             <Typography variant="h2" fontWeight="bold">
-              Building the Future, Today
+              Welcome to The Ace Luxe
+            </Typography>
+            <Typography variant="h4">
+              Where luxury meets legacy
             </Typography>
             <Typography variant="h6" sx={{ mt: 2, maxWidth: "600px", mx: "auto" }}>
-              High-quality construction services with a commitment to excellence and precision.
+              Launching Riverwalk Penthouses and Zameen Ace Mall Hotel Apartments in 2025, we redefine luxury living and hospitality.
+              <br />Join us in bringing elegance and comfort to hospitality in Pakistan.
             </Typography>
             <Button
               variant="contained"
               sx={{ mt: 3, px: 4, py: 1.5, fontSize: "1.2rem", bgcolor: "#ff9800", "&:hover": { bgcolor: "#e68900" } }}
             >
-              Get a Quote
+              Schedule a consultation
             </Button>
           </motion.div>
         </Container>
@@ -112,16 +118,16 @@ const LandingPage = () => {
           </Typography>
           <Grid container spacing={4}>
             {[
-              { title: "Residential Construction", img: service2 },
-              { title: "Commercial Projects", img: service3 },
-              { title: "Renovations & Remodeling", img: service1 },
+              { title: "Hospitality Services", img: service1 },
+              { title: "Residential & Commercial Projects", img: service2 },
+              { title: "Renovations & Remodeling", img: service3 },
             ].map((service, index) => (
               <Grid item xs={12} md={4} key={index}>
                 <motion.div whileHover={{ scale: 1.05 }}>
                   <Card sx={{ boxShadow: 3 }}>
                     <CardMedia component="img" height="200" image={service.img} alt={service.title} />
                     <CardContent>
-                      <Typography variant="h6" fontWeight="bold">
+                      <Typography variant="h7" fontWeight="bold">
                         {service.title}
                       </Typography>
                     </CardContent>
