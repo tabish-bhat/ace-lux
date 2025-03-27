@@ -55,7 +55,7 @@ function ResponsiveAppBar() {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: scrolling ? "rgba(255, 255, 255, 0.98)" : "transparent",
+        backgroundColor: scrolling ? "rgba(16,34,20,255)" : "transparent",
         boxShadow: scrolling ? "0px 4px 10px rgba(0, 0, 0, 0.1)" : "none",
         transition: "all 0.3s ease-in-out",
       }}
@@ -71,7 +71,7 @@ function ResponsiveAppBar() {
         >
           {/* Mobile: Hamburger Left, Logo Center */}
           <Box sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", flexGrow: 1 }}>
-            <IconButton size="large" onClick={handleOpenNavMenu} sx={{ color: scrolling ? "black" : "white" }}>
+            <IconButton size="large" onClick={handleOpenNavMenu} sx={{ color: scrolling ? "white" : "white" }}>
               <MenuIcon sx={{ fontSize: "2rem" }} />
             </IconButton>
             <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
@@ -90,7 +90,7 @@ function ResponsiveAppBar() {
                 <Button
                   onClick={() => handleNavigate(page.path)}
                   sx={{
-                    color: scrolling ? "black" : "white",
+                    color: scrolling ? "white" : "white",
                     fontWeight: "500",
                     fontSize: "0.95rem",
                     textTransform: "none",

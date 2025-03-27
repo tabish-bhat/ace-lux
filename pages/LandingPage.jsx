@@ -60,12 +60,8 @@ const LandingPage = () => {
             <Typography variant="h2" fontWeight="bold">
               Welcome to The Ace Luxe
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h4" sx={{ mt: 2 }}>
               Where luxury meets legacy
-            </Typography>
-            <Typography variant="h6" sx={{ mt: 2, maxWidth: "600px", mx: "auto" }}>
-              Launching Riverwalk Penthouses and Zameen Ace Mall Hotel Apartments in 2025, we redefine luxury living and hospitality.
-              <br />Join us in bringing elegance and comfort to hospitality in Pakistan.
             </Typography>
             <Button
               variant="contained"
