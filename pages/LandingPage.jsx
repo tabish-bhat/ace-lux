@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import { Box, Button, Container, Typography, Grid, Card, CardContent, CardMedia, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import Carousel from "react-multi-carousel";
@@ -10,11 +10,13 @@ import project2 from "../src/assets/project2.png";
 import project3 from "../src/assets/project3.png";
 import project4 from "../src/assets/project4.png";
 import project5 from "../src/assets/apartments.jpg";
-import project6 from "../src/assets/riverwalk.jpeg";
-import service1 from "../src/assets/hospitality.jpeg";
+import project6 from "../src/assets/hero3.jpeg";
+import service1 from "../src/assets/hero6.jpeg";
 import service2 from "../src/assets/resandcom.jpeg";
 import service3 from "../src/assets/remodling.jpeg";
-import homebg from "../src/assets/homebg.png";
+import homebg from "../src/assets/hero7.jpg";
+import ConsultationModalForm from "../components/layout/ConsultationModal";
+import { useState } from "react";
 
 const projects = [
   { id: "zameen-ace-mall", title: "Zameen ACE Mall", image: project4 },
@@ -37,6 +39,11 @@ const LandingPage = () => {
   const handleProjectClick = (id) => {
     navigate(`/projects#${id}`);
   };
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <Box sx={{ fontFamily: "Arial, sans-serif" }}>
@@ -64,18 +71,22 @@ const LandingPage = () => {
               Where luxury meets legacy
             </Typography>
             <Button
-              variant="contained"
-              sx={{ mt: 3, px: 4, py: 1.5, fontSize: "1.2rem", bgcolor: "#ff9800", "&:hover": { bgcolor: "#e68900" } }}
-            >
-              Schedule a consultation
-            </Button>
+        variant="contained"
+        onClick={openModal} // Add this onClick handler
+        sx={{ mt: 3, px: 4, py: 1.5, fontSize: "1.2rem", bgcolor: "#ff9800", "&:hover": { bgcolor: "#e68900" } }}
+      >
+        Schedule a consultation
+      </Button>
+      
+      {/* The modal component, passing the open state and close handler */}
+      <ConsultationModalForm open={isModalOpen} handleClose={closeModal} />
           </motion.div>
         </Container>
       </Box>
 
       {/* 🔹 PROJECTS CAROUSEL */}
-      <Box sx={{ backgroundColor: "black" }}>
-      <Container sx={{ py: 8, width:"100%",textAlign: "center",backgroundColor:"black" }}>
+      <Box sx={{ backgroundColor: "rgba(16,34,20,255)" }}>
+      <Container sx={{ py: 8, width:"100%",textAlign: "center",backgroundColor:"rgba(16,34,20,255)" }}>
         <Typography variant="h3" fontWeight="bold" mb={4} style={{ color:"whitesmoke" }}>
           Featured Projects
         </Typography>
@@ -136,16 +147,16 @@ const LandingPage = () => {
       </Box>
 
       {/* 🔹 FOOTER */}
-      <Box sx={{ bgcolor: "#222", color: "white", py: 6, textAlign: "center" }}>
+      <Box sx={{ bgcolor: "rgba(16,34,20,255)", color: "white", py: 6, textAlign: "center" }}>
         <Container>
           <Typography variant="h5" fontWeight="bold" mb={2}>
             Follow Us
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
             {[
-              { icon: <Facebook />, link: "https://facebook.com" },
+              { icon: <Facebook />, link: "https://www.facebook.com/share/1AHkB6s8VP/" },
               { icon: <Twitter />, link: "https://twitter.com" },
-              { icon: <Instagram />, link: "https://instagram.com" },
+              { icon: <Instagram />, link: "https://www.instagram.com/theaceluxe" },
               { icon: <LinkedIn />, link: "https://linkedin.com" },
             ].map((social, index) => (
               <IconButton

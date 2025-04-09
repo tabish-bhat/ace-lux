@@ -112,7 +112,7 @@ const AboutUs = () => {
     <motion.div initial="hidden" whileInView="visible" variants={fadeInRight}>
       <Card
         sx={{
-          bgcolor: "#333",
+          bgcolor: "rgba(16,34,20,255)",
           color: "white",
           boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
           borderRadius: "15px",

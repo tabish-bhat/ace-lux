@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Modal,
@@ -9,11 +9,16 @@ import {
   Typography,
   Container,
   Grid,
+  Card,
+  CardMedia,
+  IconButton,
 } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import backgroundImage from "../src/assets/project4.png"; // Background image
-import mallImage from "../src/assets/mall.png"; // Mall image
+import backgroundImage from "../src/assets/project4.png";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import riverwalk from "../src/assets/hero3.jpeg";
 
 const ZameenAceMallPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -21,129 +26,274 @@ const ZameenAceMallPage = () => {
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
   const [location, setLocation] = useState("");
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  // Combined data for carousel items and their corresponding detailed content
+  const projectData = [
+    {
+      image: backgroundImage,
+      title: "Zameen Ace Mall",
+      description: "The Ultimate Mixed-Use Destination for Luxury, Business & Living.",
+      detailedDescription: "Located in the heart of DHA Phase 2, Islamabad, Zameen Ace Mall is an architectural marvel and a hub of luxury living and commerce. Expanding our hospitality footprint, The Ace Luxe is set to introduce Hotel Apartments & a Business Center, offering an elite accommodation and corporate experience like no other. Our hospitality ventures are built on a legacy of excellence, ensuring that every stay, every meal, and every business engagement is an experience to remember.",
+      features: [
+        "Hotel Apartments – A seamless fusion of residential comfort and hotel luxury",
+        "Business Center – Premium space for professionals with modern workspaces",
+        "Luxury Shopping – International and local brands under one roof",
+        "Fine Dining – World-class restaurants and cafes"
+      ]
+    },
+    {
+      image: riverwalk,
+      title: "Riverwalk",
+      description: "A vibrant waterfront destination offering a unique blend of leisure, dining, and retail experiences.",
+      detailedDescription: "Nestled along the serene banks of the river, Riverwalk is a premier destination that combines natural beauty with modern luxury. This waterfront development features expansive promenades, exclusive boutiques, and fine dining establishments with spectacular views. Whether you're looking for a peaceful retreat or an exciting day out, Riverwalk offers something for everyone.",
+      features: [
+        "Waterfront Dining – Restaurants with panoramic river views",
+        "Luxury Retail – Exclusive shopping experience with premium brands",
+        "Riverside Apartments – Contemporary living spaces with nature at your doorstep",
+        "Recreation Areas – Parks, walking trails, and outdoor activity spaces"
+      ]
+    },
+  ];
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prevSlide) => (prevSlide + 1) % projectData.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [projectData.length]);
+
+  // Carousel navigation
+  const nextSlide = () => {
+    setActiveSlide((prevSlide) => (prevSlide + 1) % projectData.length);
+  };
+
+  const prevSlide = () => {
+    setActiveSlide((prevSlide) => (prevSlide - 1 + projectData.length) % projectData.length);
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* Hero Section */}
+      {/* Hero Carousel Section */}
       <Box
         sx={{
           minHeight: "100vh",
           position: "relative",
           overflow: "hidden",
-          background: `url(${backgroundImage}) center/cover`,
         }}
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            background: "rgba(0, 0, 0, 0.6)",
-          }}
-        />
-
-        {/* Hero Content */}
-        <Box
-          sx={{
-            position: "relative",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            color: "white",
-            px: 3,
-          }}
-        >
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            <Typography
-              variant="h2"
+        {/* Carousel */}
+        <Box sx={{ position: "relative", height: "100vh", width: "100%" }}>
+          {projectData.map((item, index) => (
+            <Box
+              key={index}
               sx={{
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                letterSpacing: 2,
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                opacity: activeSlide === index ? 1 : 0,
+                transition: "opacity 3s ease-in-out",
+                background: `url(${item.image}) center/cover`,
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: "rgba(0, 0, 0, 0.6)",
+                }
               }}
             >
-              Zameen Ace Mall
-            </Typography>
-            <Typography variant="h5" sx={{ mt: 2, maxWidth: "600px" }}>
-              The Ultimate Mixed-Use Destination for Luxury, Business & Living.
-            </Typography>
-          </motion.div>
+              <Box
+                sx={{
+                  position: "relative",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  color: "white",
+                  px: 3,
+                }}
+              >
+                <motion.div
+                  key={index}
+                  initial={{ y: -50, opacity: 0 }}
+                  animate={activeSlide === index ? { y: 0, opacity: 1 } : { y: -50, opacity: 0 }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                >
+                  <Typography
+                    variant="h2"
+                    sx={{
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                      letterSpacing: 2,
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography variant="h5" sx={{ mt: 2, maxWidth: "600px", mx: "auto" }}>
+                    {item.description}
+                  </Typography>
+                </motion.div>
+              </Box>
+            </Box>
+          ))}
+
+          {/* Carousel Navigation */}
+          <Box sx={{ position: "absolute", bottom: "50px", width: "100%", display: "flex", justifyContent: "center", gap: 2 }}>
+            {projectData.map((_, index) => (
+              <Box
+                key={index}
+                onClick={() => setActiveSlide(index)}
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  background: activeSlide === index ? "#03A3E0" : "rgba(255,255,255,0.5)",
+                  cursor: "pointer"
+                }}
+              />
+            ))}
+          </Box>
+
+          <IconButton
+            onClick={prevSlide}
+            sx={{
+              position: "absolute",
+              left: 20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "white",
+              background: "rgba(0,0,0,0.3)",
+              "&:hover": { background: "rgba(0,0,0,0.5)" }
+            }}
+          >
+            <ArrowBackIosIcon />
+          </IconButton>
+
+          <IconButton
+            onClick={nextSlide}
+            sx={{
+              position: "absolute",
+              right: 20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "white",
+              background: "rgba(0,0,0,0.3)",
+              "&:hover": { background: "rgba(0,0,0,0.5)" }
+            }}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
 
           {/* Call to Action Button */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              variant="contained"
-              sx={{
-                mt: 4,
-                px: 5,
-                py: 2,
-                borderRadius: "50px",
-                background: "#03A3E0",
-                color: "white",
-                fontWeight: "bold",
-                "&:hover": { background: "#0282BE" },
-              }}
-              onClick={() => setIsFormOpen(true)}
-            >
-              Book a Consultation
-            </Button>
-          </motion.div>
+          <Box sx={{ position: "absolute", bottom: "120px", width: "100%", display: "flex", justifyContent: "center" }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="contained"
+                sx={{
+                  px: 5,
+                  py: 2,
+                  borderRadius: "50px",
+                  background: "#03A3E0",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&:hover": { background: "#0282BE" },
+                }}
+                onClick={() => setIsFormOpen(true)}
+              >
+                Book a Consultation
+              </Button>
+            </motion.div>
+          </Box>
         </Box>
       </Box>
 
-      {/* About Section with Glass Effect */}
+      {/* Dynamic Content Section based on active carousel item */}
       <Container sx={{ py: 10 }}>
+        <Typography variant="h4" sx={{ fontWeight: "bold", mb: 6, textAlign: "center" }}>
+          Discover {projectData[activeSlide].title}
+        </Typography>
+
+        {/* Project Content That Changes Based on Active Slide */}
         <Grid container spacing={5} alignItems="center">
           <Grid item xs={12} md={6}>
-          <motion.div
-  initial={{ opacity: 0, x: -50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1 }}
-  style={{
-    width: "100%",
-    height: "250px",
-    borderRadius: "15px",
-    padding: "20px",
-    backdropFilter: "blur(20px)",
-    backgroundColor: "rgba(255, 255, 255, 0.1)", // Semi-transparent effect
-    backgroundImage: `url(${mallImage})`, // Image
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    border: "1px solid rgba(255, 255, 255, 0.2)",
-  }}
-/>
-
+            <motion.div
+              key={`image-${activeSlide}`}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Card sx={{ 
+                borderRadius: "15px", 
+                overflow: "hidden", 
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)" 
+              }}>
+                <CardMedia
+                  component="img"
+                  height="500"
+                  image={projectData[activeSlide].image}
+                  alt={projectData[activeSlide].title}
+                />
+              </Card>
+            </motion.div>
           </Grid>
           <Grid item xs={12} md={6}>
             <motion.div
+              key={`content-${activeSlide}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.8 }}
             >
               <Typography variant="h4" sx={{ fontWeight: "bold", mb: 2 }}>
-                About Zameen Ace Mall
+                {projectData[activeSlide].title}
               </Typography>
-              <Typography variant="body1" sx={{ color: "gray" }}>
-              Located in the heart of DHA Phase 2, Islamabad, Zameen Ace Mall is an architectural marvel and a hub of luxury living and commerce. Expanding our hospitality footprint, The Ace Luxe is set to introduce Hotel Apartments & a Business Center, offering an elite accommodation and corporate experience like no other.
-              <br /> 
-<b>•	Hotel Apartments</b> – A seamless fusion of residential comfort and hotel luxury, designed to cater to short-term and extended stays with world-class amenities.
-<br /><b>•	Business Center</b> – A premium space for professionals and enterprises, equipped with modern workspaces, high-speed connectivity, and meeting rooms designed to enhance productivity and convenience.
-<br /> <br />
-Our hospitality ventures are built on a legacy of excellence, ensuring that every stay, every meal, and every business engagement is an experience to remember.
-<br />
-Join us as we embark on this journey to redefine hospitality in Pakistan, delivering <b>luxury</b>, <b>comfort</b>, and <b>prestige</b> under one name – <b>The Ace Luxe</b>.
-
+              <Typography variant="body1" sx={{ color: "gray", mb: 3 }}>
+                {projectData[activeSlide].detailedDescription}
               </Typography>
+              
+              <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+                Key Features
+              </Typography>
+              
+              {projectData[activeSlide].features.map((feature, index) => (
+                <Box key={index} sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                  <Box
+                    sx={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: "50%",
+                      background: "#03A3E0",
+                      mr: 2
+                    }}
+                  />
+                  <Typography variant="body1" sx={{ color: "gray" }}>
+                    {feature}
+                  </Typography>
+                </Box>
+              ))}
+              
+              <Box sx={{ mt: 4 }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "#03A3E0",
+                    borderRadius: "20px",
+                    px: 4,
+                    py: 1.5,
+                    color: "white",
+                    "&:hover": { background: "#0282BE" },
+                  }}
+                  onClick={() => setIsFormOpen(true)}
+                >
+                  Schedule a Visit
+                </Button>
+              </Box>
             </motion.div>
           </Grid>
         </Grid>
@@ -151,151 +301,150 @@ Join us as we embark on this journey to redefine hospitality in Pakistan, delive
 
       {/* Consultation Form Modal */}
       <Modal open={isFormOpen} onClose={() => setIsFormOpen(false)}>
-  <Box
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      px: 2,
-    }}
-  >
-    <motion.div
-      initial={{ y: 150, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      style={{
-        background: "rgba(255, 255, 255, 0.9)", // Increased opacity for better contrast
-        backdropFilter: "blur(15px)",
-        borderRadius: "12px",
-        padding: "30px",
-        maxWidth: "500px",
-        width: "100%",
-        boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-        color: "black",
-      }}
-    >
-      <Typography
-        variant="h5"
-        sx={{
-          mb: 3,
-          fontWeight: "bold",
-          color: "#333", // Darker color for better readability
-          textAlign: "center",
-        }}
-      >
-        Property Consultation
-      </Typography>
-
-      <form>
-        <TextField
-          select
-          label="Property Type"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          fullWidth
+        <Box
           sx={{
-            mb: 2,
-            background: "white",
-            borderRadius: "5px",
-            "& .MuiInputBase-input": { color: "#333" }, // Dark text for better visibility
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+            px: 2,
           }}
         >
-          {["1-Bed", "2-Bed", "3-Bed", "Penthouse"].map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        {/* Check-in & Check-out Fields in One Row */}
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <DatePicker
-                label="Check-in Date"
-                value={checkIn}
-                onChange={(newValue) => setCheckIn(newValue)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    fullWidth
-                    sx={{
-                      background: "white",
-                      borderRadius: "5px",
-                      "& .MuiInputBase-input": { color: "#333" },
-                    }}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <DatePicker
-                label="Check-out Date"
-                value={checkOut}
-                onChange={(newValue) => setCheckOut(newValue)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    fullWidth
-                    sx={{
-                      background: "white",
-                      borderRadius: "5px",
-                      "& .MuiInputBase-input": { color: "#333" },
-                    }}
-                  />
-                )}
-              />
-            </Grid>
-          </Grid>
-        </LocalizationProvider>
-
-        <TextField
-          label="Preferred Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          fullWidth
-          sx={{
-            mt: 2,
-            background: "white",
-            borderRadius: "5px",
-            "& .MuiInputBase-input": { color: "#333" },
-          }}
-        />
-
-        {/* Buttons Row */}
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-          <Button
-            variant="outlined"
-            onClick={() => setIsFormOpen(false)}
-            sx={{
-              borderRadius: "20px",
-              px: 3,
-              borderColor: "#03A3E0",
-              color: "#03A3E0",
-              "&:hover": { backgroundColor: "#f0faff" },
+          <motion.div
+            initial={{ y: 150, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              background: "rgba(255, 255, 255, 0.9)",
+              backdropFilter: "blur(15px)",
+              borderRadius: "12px",
+              padding: "30px",
+              maxWidth: "500px",
+              width: "100%",
+              boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+              color: "black",
             }}
           >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              background: "#03A3E0",
-              borderRadius: "20px",
-              px: 4,
-              color: "white",
-              "&:hover": { background: "#0282BE" },
-            }}
-          >
-            Submit
-          </Button>
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 3,
+                fontWeight: "bold",
+                color: "#333",
+                textAlign: "center",
+              }}
+            >
+              Property Consultation - {projectData[activeSlide].title}
+            </Typography>
+
+            <form>
+              <TextField
+                select
+                label="Property Type"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                fullWidth
+                sx={{
+                  mb: 2,
+                  background: "white",
+                  borderRadius: "5px",
+                  "& .MuiInputBase-input": { color: "#333" },
+                }}
+              >
+                {["1-Bed", "2-Bed", "3-Bed", "Penthouse"].map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              {/* Check-in & Check-out Fields in One Row */}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <DatePicker
+                      label="Check-in Date"
+                      value={checkIn}
+                      onChange={(newValue) => setCheckIn(newValue)}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          fullWidth
+                          sx={{
+                            background: "white",
+                            borderRadius: "5px",
+                            "& .MuiInputBase-input": { color: "#333" },
+                          }}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <DatePicker
+                      label="Check-out Date"
+                      value={checkOut}
+                      onChange={(newValue) => setCheckOut(newValue)}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          fullWidth
+                          sx={{
+                            background: "white",
+                            borderRadius: "5px",
+                            "& .MuiInputBase-input": { color: "#333" },
+                          }}
+                        />
+                      )}
+                    />
+                  </Grid>
+                </Grid>
+              </LocalizationProvider>
+
+              <TextField
+                label="Preferred Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                fullWidth
+                sx={{
+                  mt: 2,
+                  background: "white",
+                  borderRadius: "5px",
+                  "& .MuiInputBase-input": { color: "#333" },
+                }}
+              />
+
+              {/* Buttons Row */}
+              <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+                <Button
+                  variant="outlined"
+                  onClick={() => setIsFormOpen(false)}
+                  sx={{
+                    borderRadius: "20px",
+                    px: 3,
+                    borderColor: "#03A3E0",
+                    color: "#03A3E0",
+                    "&:hover": { backgroundColor: "#f0faff" },
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "#03A3E0",
+                    borderRadius: "20px",
+                    px: 4,
+                    color: "white",
+                    "&:hover": { background: "#0282BE" },
+                  }}
+                >
+                  Submit
+                </Button>
+              </Box>
+            </form>
+          </motion.div>
         </Box>
-      </form>
-    </motion.div>
-  </Box>
-</Modal>
-
+      </Modal>
     </LocalizationProvider>
   );
 };

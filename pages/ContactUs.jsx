@@ -27,7 +27,7 @@ const ContactUs = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#121212",
+          backgroundColor: "rgba(16,34,20,255)",
           padding: "20px",
         }}
       >

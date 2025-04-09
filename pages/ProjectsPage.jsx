@@ -7,7 +7,7 @@ import project2 from "../src/assets/project2.png";
 import project3 from "../src/assets/project3.png";
 import project4 from "../src/assets/project4.png";
 import project5 from "../src/assets/apartments.jpg";
-import project6 from "../src/assets/riverwalk.jpeg";
+import project6 from "../src/assets/hero3.jpeg";
 
 // import { useLocation } from "react-router-dom";
 
@@ -99,7 +99,7 @@ const ProjectShowcase = () => {
   }, []);
 
   return (
-    <Box sx={{ backgroundColor: colors.primary, color: colors.accent, minHeight: "100vh", pb: "50px" }}>
+    <Box sx={{ backgroundColor: "rgba(16,34,20,255)", color: colors.accent, minHeight: "100vh", pb: "50px" }}>
       <Container sx={{ py: 8 }}>
         <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "bold", mb: 1, textTransform: "uppercase" }}>
