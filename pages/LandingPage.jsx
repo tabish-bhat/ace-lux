@@ -7,22 +7,22 @@ import { useNavigate } from "react-router-dom";
 import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
 import project1 from "../src/assets/project1.png";
 import project2 from "../src/assets/project2.png";
-import project3 from "../src/assets/project3.png";
+// import project3 from "../src/assets/project3.png";
 import project4 from "../src/assets/project4.png";
 import project5 from "../src/assets/apartments.jpg";
 import project6 from "../src/assets/hero3.jpeg";
 import service1 from "../src/assets/hero6.jpeg";
 import service2 from "../src/assets/resandcom.jpeg";
 import service3 from "../src/assets/remodling.jpeg";
-import homebg from "../src/assets/hero7.jpg";
+import homebg from "../src/assets/hero.png";
 import ConsultationModalForm from "../components/layout/ConsultationModal";
 import { useState } from "react";
 
 const projects = [
   { id: "zameen-ace-mall", title: "Zameen ACE Mall", image: project4 },
   { id: "luxury-farmhouses", title: "Luxury Farmhouses", image: project2 },
-  { id: "dha-villas", title: "DHA Islamabad Villas", image: project1 },
-  { id: "e11-villas", title: "E-11 Villas", image: project3 },
+  { id: "dha-villas", title: "Villas DHA-Islamabad", image: project1 },
+  // { id: "e11-villas", title: "E-11 Villas", image: project3 },
   { id: "serviced-apartments", title: "Serviced Apartments", image: project5 },
   { id: "riverwalk-luxury-apartments", title: "Riverwalk Luxury Apartments", image: project6 },
 ];
@@ -48,34 +48,46 @@ const LandingPage = () => {
   return (
     <Box sx={{ fontFamily: "Arial, sans-serif" }}>
       {/* 🔹 HERO SECTION */}
-      <Box
-        sx={{
-          height: "100vh",
-          backgroundImage: `url(${homebg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "white",
-          textAlign: "center",
-          px: 3,
-        }}
+        <Box
+          sx={{
+            height: "100vh",
+            backgroundImage: `url(${homebg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#fee4c9",
+            textAlign: "center",
+            px: 3,
+          }}
+        >
+          <Container>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+          <Typography
+            variant="h2"
+            fontWeight="bold"
+            sx={{
+              fontSize: { xs: "2rem", sm: "3rem", md: "4rem", lg: "4rem" },
+            }}
+          >
+            SKYHOUSE <br /> BY <br /> THE ACE LUXE
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{
+              mt: 2,
+              fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem", lg: "2rem" },
+            }}
+          >
+            Where luxury meets legacy
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={openModal} // Add this onClick handler
+        sx={{ mt: 3, px: 4, py: 1.5, fontSize: "1rem", bgcolor: "#ff9800", "&:hover": { bgcolor: "#e68900" } }}
       >
-        <Container backgroundColor="black">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-            <Typography variant="h2" fontWeight="bold">
-              Welcome to The Ace Luxe
-            </Typography>
-            <Typography variant="h4" sx={{ mt: 2 }}>
-              Where luxury meets legacy
-            </Typography>
-            <Button
-        variant="contained"
-        onClick={openModal} // Add this onClick handler
-        sx={{ mt: 3, px: 4, py: 1.5, fontSize: "1.2rem", bgcolor: "#ff9800", "&:hover": { bgcolor: "#e68900" } }}
-      >
-        Schedule a consultation
+        Check Availability
       </Button>
       
       {/* The modal component, passing the open state and close handler */}

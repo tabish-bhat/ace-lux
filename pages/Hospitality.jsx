@@ -207,7 +207,7 @@ const ZameenAceMallPage = () => {
                 }}
                 onClick={() => setIsFormOpen(true)}
               >
-                Book a Consultation
+                Check Availability
               </Button>
             </motion.div>
           </Box>
@@ -291,7 +291,7 @@ const ZameenAceMallPage = () => {
                   }}
                   onClick={() => setIsFormOpen(true)}
                 >
-                  Schedule a Visit
+                  Check Availability
                 </Button>
               </Box>
             </motion.div>
@@ -334,7 +334,7 @@ const ZameenAceMallPage = () => {
                 textAlign: "center",
               }}
             >
-              Property Consultation - {projectData[activeSlide].title}
+              Check Availability - {projectData[activeSlide].title}
             </Typography>
 
             <form>
