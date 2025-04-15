@@ -1,152 +1,178 @@
-//import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import PropTypes from 'prop-types';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import { useState } from 'react';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Modal,
+  TextField,
+  Button,
+  MenuItem,
+  Box,
+  Typography,
+  Grid,
+} from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import PropTypes from "prop-types";
 
-// This is the extracted modal component that accepts an open state and close handler
 const ConsultationModalForm = ({ open, handleClose }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    preferredDate: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
+  const [category, setCategory] = useState("");
+  const [checkIn, setCheckIn] = useState(null);
+  const [checkOut, setCheckOut] = useState(null);
+  const [location, setLocation] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Consultation request submitted:', formData);
-    // Process form data here
+    console.log("Form submitted:", { category, checkIn, checkOut, location });
     handleClose();
   };
 
   return (
-    <Dialog 
-      open={open} 
-      onClose={handleClose}
-      maxWidth="sm"
-      fullWidth
-    >
-      <DialogTitle sx={{ bgcolor: '#ff9800', color: 'white', fontWeight: 'bold' }}>
-        Schedule a Consultation
-      </DialogTitle>
-      <Box component="form" onSubmit={handleSubmit}>
-        <DialogContent>
-          <DialogContentText sx={{ mb: 3 }}>
-            Please fill out the form below to schedule your consultation. We&apos;ll get back to you as soon as possible.
-          </DialogContentText>
-          <Stack spacing={3}>
+    <Modal open={open} onClose={handleClose}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          px: 2,
+        }}
+      >
+        <motion.div
+          initial={{ y: 150, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            background: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(15px)",
+            borderRadius: "12px",
+            padding: "30px",
+            maxWidth: "500px",
+            width: "100%",
+            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+            color: "black",
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 3,
+              fontWeight: "bold",
+              color: "#333",
+              textAlign: "center",
+            }}
+          >
+            Check Availability
+          </Typography>
+
+          <form onSubmit={handleSubmit}>
             <TextField
-              autoFocus
-              required
-              name="name"
-              label="Full Name"
-              type="text"
+              select
+              label="Property Type"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
               fullWidth
-              variant="outlined"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            <TextField
-              required
-              name="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="outlined"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <TextField
-              name="phone"
-              label="Phone Number"
-              type="tel"
-              fullWidth
-              variant="outlined"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-            <FormControl fullWidth required>
-              <InputLabel id="service-label">Service</InputLabel>
-              <Select
-                labelId="service-label"
-                name="service"
-                value={formData.service}
-                label="Service"
-                onChange={handleChange}
-              >
-                <MenuItem value="strategy">Business Strategy</MenuItem>
-                <MenuItem value="marketing">Marketing</MenuItem>
-                <MenuItem value="financial">Financial Planning</MenuItem>
-                <MenuItem value="operations">Operations</MenuItem>
-                <MenuItem value="other">Other</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
-              name="preferredDate"
-              label="Preferred Date"
-              type="date"
-              fullWidth
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
+              sx={{
+                mb: 2,
+                background: "white",
+                borderRadius: "5px",
+                "& .MuiInputBase-input": { color: "#333" },
               }}
-              value={formData.preferredDate}
-              onChange={handleChange}
-            />
+            >
+              {["1-Bed", "2-Bed", "3-Bed", "Penthouse"].map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <DatePicker
+                    label="Check-in Date"
+                    value={checkIn}
+                    onChange={(newValue) => setCheckIn(newValue)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        fullWidth
+                        sx={{
+                          background: "white",
+                          borderRadius: "5px",
+                          "& .MuiInputBase-input": { color: "#333" },
+                        }}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <DatePicker
+                    label="Check-out Date"
+                    value={checkOut}
+                    onChange={(newValue) => setCheckOut(newValue)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        fullWidth
+                        sx={{
+                          background: "white",
+                          borderRadius: "5px",
+                          "& .MuiInputBase-input": { color: "#333" },
+                        }}
+                      />
+                    )}
+                  />
+                </Grid>
+              </Grid>
+            </LocalizationProvider>
+
             <TextField
-              name="message"
-              label="Tell us more about your needs"
-              multiline
-              rows={4}
+              label="Preferred Location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               fullWidth
-              variant="outlined"
-              value={formData.message}
-              onChange={handleChange}
+              sx={{
+                mt: 2,
+                background: "white",
+                borderRadius: "5px",
+                "& .MuiInputBase-input": { color: "#333" },
+              }}
             />
-          </Stack>
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 3 }}>
-          <Button 
-            onClick={handleClose} 
-            variant="outlined" 
-            sx={{ color: '#ff9800', borderColor: '#ff9800', '&:hover': { borderColor: '#e68900' } }}
-          >
-            Cancel
-          </Button>
-          <Button 
-            type="submit" 
-            variant="contained" 
-            sx={{ bgcolor: '#ff9800', '&:hover': { bgcolor: '#e68900' } }}
-          >
-            Schedule Now
-          </Button>
-        </DialogActions>
+
+            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+              <Button
+                variant="outlined"
+                onClick={handleClose}
+                sx={{
+                  borderRadius: "20px",
+                  px: 3,
+                  borderColor: "#03A3E0",
+                  color: "#03A3E0",
+                  "&:hover": { backgroundColor: "#f0faff" },
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  background: "#03A3E0",
+                  borderRadius: "20px",
+                  px: 4,
+                  color: "white",
+                  "&:hover": { background: "#0282BE" },
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
+          </form>
+        </motion.div>
       </Box>
-    </Dialog>
+    </Modal>
   );
 };
+
 ConsultationModalForm.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,

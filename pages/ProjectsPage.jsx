@@ -28,18 +28,18 @@ const projects = [
   },
   {
     id: "dha-villas",
-    title: "DHA Islamabad Houses",
-    location: "DHA Islamabad",
+    title: "Villas",
+    location: "DHA-Islamabad",
     description: "Ace Group has meticulously crafted modern and elegant residential houses in DHA Phase 2, Islamabad, offering luxury, security, and comfort in one of the city's most sought-after locations.",
     image: project1,
   },
-  {
-    id: "e11-villas",
-    title: "E-11 Houses",
-    location: "Sector E-11",
-    description: "With prime residential developments in Sector E-11, Ace Group delivers contemporary homes that balance high-end living with accessibility and convenience.",
-    image: project3,
-  },
+  // {
+  //   id: "e11-villas",
+  //   title: "E-11 Houses",
+  //   location: "Sector E-11",
+  //   description: "With prime residential developments in Sector E-11, Ace Group delivers contemporary homes that balance high-end living with accessibility and convenience.",
+  //   image: project3,
+  // },
   {
     id: "serviced-apartments",
     title: "Serviced Apartments",
