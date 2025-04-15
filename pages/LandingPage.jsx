@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
 import project1 from "../src/assets/project1.png";
 import project2 from "../src/assets/project2.png";
-// import project3 from "../src/assets/project3.png";
 import project4 from "../src/assets/project4.png";
 import project5 from "../src/assets/apartments.jpg";
 import project6 from "../src/assets/hero3.jpeg";
@@ -15,6 +14,7 @@ import service1 from "../src/assets/hero6.jpeg";
 import service2 from "../src/assets/resandcom.jpeg";
 import service3 from "../src/assets/remodling.jpeg";
 import homebg from "../src/assets/hero.png";
+import logo_head from "../src/assets/logo-head.png";
 import ConsultationModalForm from "../components/layout/ConsultationModal";
 import { useState } from "react";
 
@@ -22,7 +22,6 @@ const projects = [
   { id: "zameen-ace-mall", title: "Zameen ACE Mall", image: project4 },
   { id: "luxury-farmhouses", title: "Luxury Farmhouses", image: project2 },
   { id: "dha-villas", title: "Villas DHA-Islamabad", image: project1 },
-  // { id: "e11-villas", title: "E-11 Villas", image: project3 },
   { id: "serviced-apartments", title: "Serviced Apartments", image: project5 },
   { id: "riverwalk-luxury-apartments", title: "Riverwalk Luxury Apartments", image: project6 },
 ];
@@ -64,15 +63,46 @@ const LandingPage = () => {
         >
           <Container>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-          <Typography
-            variant="h2"
-            fontWeight="bold"
-            sx={{
-              fontSize: { xs: "2rem", sm: "3rem", md: "4rem", lg: "4rem" },
-            }}
-          >
-            SKYHOUSE <br /> BY <br /> THE ACE LUXE
-          </Typography>
+            <Typography
+              variant="h2"
+              fontWeight="bold"
+              sx={{
+                fontSize: { xs: "3rem", sm: "4rem", md: "5rem", lg: "5rem" }, // Adjust size for "SKYHOUSE"
+              }}
+            >
+              SKYHOUSE
+            </Typography>
+            <Typography
+              variant="h4"
+              fontWeight="medium"
+              sx={{
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "2.5rem" }, // Adjust size for "BY"
+                mt: 1,
+              }}
+            >
+              BY
+            </Typography>
+            <Box
+                component="img"
+                src={logo_head} // Replace with the desired image path
+                alt="Ace Luxe Logo"
+                sx={{
+                width: { xs: "30px", sm: "50px", md: "70px", lg: "100px" },
+                mt: 1,
+                mx: "auto",
+                }}
+              />
+            <Typography
+              variant="h4"
+              fontWeight="bold"
+              sx={{
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "2.5rem" }, // Same size as "BY" for "ACE LUXE"
+                mt: 1,
+              }}
+            >
+              ACE LUXE
+            </Typography>
+
           <Typography
             variant="h3"
             sx={{
