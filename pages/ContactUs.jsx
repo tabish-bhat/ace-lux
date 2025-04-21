@@ -111,25 +111,25 @@ const ContactUs = () => {
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
                 <LocationOn sx={{ color: "#121212", mr: 2 }} />
                 <Typography variant="body1">
-                  <strong>Address:</strong> 198 West 21th Street, Suite 721, New York NY 10016
+                  <strong>Address:</strong> Ace Luxe, Ground Floor, Riverwalk Luxury Apartment, River Garden, Islamabad Expressway, Islamabad
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
                 <Phone sx={{ color: "#121212", mr: 2 }} />
                 <Typography variant="body1">
-                  <strong>Phone:</strong> +92-30000-43211 
+                  <strong>Phone:</strong> +92-332-0432677
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
                 <Email sx={{ color: "#121212", mr: 2 }} />
                 <Typography variant="body1">
-                  <strong>Email:</strong> info@acegroup.com.pk
+                  <strong>Email:</strong> info@theaceluxe.com
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center">
                 <Language sx={{ color: "#121212", mr: 2 }} />
                 <Typography variant="body1">
-                  <strong>Website:</strong> yoursite.com
+                  <strong>Website:</strong> theaceluxe.com
                 </Typography>
               </Box>
             </CardContent>
