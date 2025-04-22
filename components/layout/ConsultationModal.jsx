@@ -77,7 +77,7 @@ const ConsultationModalForm = ({ open, handleClose }) => {
                 "& .MuiInputBase-input": { color: "#333" },
               }}
             >
-              {["1-Bed", "2-Bed", "3-Bed", "Penthouse"].map((option) => (
+              {["1-Bed", "2-Bed", "3-Bed", "4-Bed (Penthouse)"].map((option) => (
                 <MenuItem key={option} value={option}>
                   {option}
                 </MenuItem>

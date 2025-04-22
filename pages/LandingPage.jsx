@@ -22,7 +22,7 @@ const projects = [
   { id: "zameen-ace-mall", title: "Zameen ACE Mall", image: project4 },
   { id: "luxury-farmhouses", title: "Luxury Farmhouses", image: project2 },
   { id: "dha-villas", title: "Villas DHA-Islamabad", image: project1 },
-  { id: "serviced-apartments", title: "Serviced Apartments", image: project5 },
+  { id: "serviced-apartments", title: "Serviced Apartments Murree", image: project5 },
   { id: "riverwalk-luxury-apartments", title: "Riverwalk Luxury Apartments", image: project6 },
 ];
 

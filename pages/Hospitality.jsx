@@ -58,12 +58,19 @@ const ZameenAceMallPage = () => {
 
   // Auto-advance carousel
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((prevSlide) => (prevSlide + 1) % projectData.length);
-    }, 5000);
+    let interval;
+    if (!isFormOpen) {
+      interval = setInterval(() => {
+        setActiveSlide((prevSlide) => (prevSlide + 1) % projectData.length);
+      }, 5000);
+    }
 
-    return () => clearInterval(interval);
-  }, [projectData.length]);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [projectData.length, isFormOpen]);
 
   // Carousel navigation
   const nextSlide = () => {
@@ -191,25 +198,8 @@ const ZameenAceMallPage = () => {
             <ArrowForwardIosIcon />
           </IconButton>
 
-          {/* Call to Action Button */}
+          {/* Call to Action Button - Removed from hero slider */}
           <Box sx={{ position: "absolute", bottom: "120px", width: "100%", display: "flex", justifyContent: "center" }}>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="contained"
-                sx={{
-                  px: 5,
-                  py: 2,
-                  borderRadius: "50px",
-                  background: "#03A3E0",
-                  color: "white",
-                  fontWeight: "bold",
-                  "&:hover": { background: "#0282BE" },
-                }}
-                onClick={() => setIsFormOpen(true)}
-              >
-                Check Availability
-              </Button>
-            </motion.div>
           </Box>
         </Box>
       </Box>
@@ -279,20 +269,22 @@ const ZameenAceMallPage = () => {
               ))}
               
               <Box sx={{ mt: 4 }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    background: "#03A3E0",
-                    borderRadius: "20px",
-                    px: 4,
-                    py: 1.5,
-                    color: "white",
-                    "&:hover": { background: "#0282BE" },
-                  }}
-                  onClick={() => setIsFormOpen(true)}
-                >
-                  Check Availability
-                </Button>
+                {projectData[activeSlide].title === "Riverwalk" && (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      background: "#03A3E0",
+                      borderRadius: "20px",
+                      px: 4,
+                      py: 1.5,
+                      color: "white",
+                      "&:hover": { background: "#0282BE" },
+                    }}
+                    onClick={() => setIsFormOpen(true)}
+                  >
+                    Check Availability
+                  </Button>
+                )}
               </Box>
             </motion.div>
           </Grid>
@@ -300,9 +292,24 @@ const ZameenAceMallPage = () => {
       </Container>
 
       {/* Consultation Form Modal */}
-      <Modal open={isFormOpen} onClose={() => setIsFormOpen(false)}>
+      <Modal 
+        open={isFormOpen} 
+        onClose={() => setIsFormOpen(false)}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: 'auto',
+        }}
+      >
         <Box
           sx={{
+            position: 'relative',
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -323,6 +330,8 @@ const ZameenAceMallPage = () => {
               width: "100%",
               boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
               color: "black",
+              position: 'relative',
+              zIndex: 1,
             }}
           >
             <Typography
@@ -334,7 +343,7 @@ const ZameenAceMallPage = () => {
                 textAlign: "center",
               }}
             >
-              Check Availability - {projectData[activeSlide].title}
+              Check Availability - Riverwalk
             </Typography>
 
             <form>
@@ -351,7 +360,7 @@ const ZameenAceMallPage = () => {
                   "& .MuiInputBase-input": { color: "#333" },
                 }}
               >
-                {["1-Bed", "2-Bed", "3-Bed", "Penthouse"].map((option) => (
+                {["1-Bed", "2-Bed", "3-Bed", "4-Bed (Penthouse)"].map((option) => (
                   <MenuItem key={option} value={option}>
                     {option}
                   </MenuItem>
