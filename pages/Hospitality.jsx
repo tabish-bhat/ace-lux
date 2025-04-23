@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import {
   Modal,
   TextField,
@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import backgroundImage from "../src/assets/project4.png";
+// import backgroundImage from "../src/assets/project4.png";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import riverwalk from "../src/assets/hero3.jpeg";
@@ -30,18 +30,18 @@ const ZameenAceMallPage = () => {
 
   // Combined data for carousel items and their corresponding detailed content
   const projectData = [
-    {
-      image: backgroundImage,
-      title: "Zameen Ace Mall",
-      description: "The Ultimate Mixed-Use Destination for Luxury, Business & Living.",
-      detailedDescription: "Located in the heart of DHA Phase 2, Islamabad, Zameen Ace Mall is an architectural marvel and a hub of luxury living and commerce. Expanding our hospitality footprint, The Ace Luxe is set to introduce Hotel Apartments & a Business Center, offering an elite accommodation and corporate experience like no other. Our hospitality ventures are built on a legacy of excellence, ensuring that every stay, every meal, and every business engagement is an experience to remember.",
-      features: [
-        "Hotel Apartments – A seamless fusion of residential comfort and hotel luxury",
-        "Business Center – Premium space for professionals with modern workspaces",
-        "Luxury Shopping – International and local brands under one roof",
-        "Fine Dining – World-class restaurants and cafes"
-      ]
-    },
+    // {
+    //   image: backgroundImage,
+    //   title: "Zameen Ace Mall",
+    //   description: "The Ultimate Mixed-Use Destination for Luxury, Business & Living.",
+    //   detailedDescription: "Located in the heart of DHA Phase 2, Islamabad, Zameen Ace Mall is an architectural marvel and a hub of luxury living and commerce. Expanding our hospitality footprint, The Ace Luxe is set to introduce Hotel Apartments & a Business Center, offering an elite accommodation and corporate experience like no other. Our hospitality ventures are built on a legacy of excellence, ensuring that every stay, every meal, and every business engagement is an experience to remember.",
+    //   features: [
+    //     "Hotel Apartments – A seamless fusion of residential comfort and hotel luxury",
+    //     "Business Center – Premium space for professionals with modern workspaces",
+    //     "Luxury Shopping – International and local brands under one roof",
+    //     "Fine Dining – World-class restaurants and cafes"
+    //   ]
+    // },
     {
       image: riverwalk,
       title: "Riverwalk",
@@ -127,12 +127,12 @@ const ZameenAceMallPage = () => {
                   px: 3,
                 }}
               >
-                <motion.div
+                {/* <motion.div
                   key={index}
                   initial={{ y: -50, opacity: 0 }}
                   animate={activeSlide === index ? { y: 0, opacity: 1 } : { y: -50, opacity: 0 }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                >
+                > */}
                   <Typography
                     variant="h2"
                     sx={{
@@ -146,7 +146,7 @@ const ZameenAceMallPage = () => {
                   <Typography variant="h5" sx={{ mt: 2, maxWidth: "600px", mx: "auto" }}>
                     {item.description}
                   </Typography>
-                </motion.div>
+                {/* </motion.div> */}
               </Box>
             </Box>
           ))}
@@ -213,12 +213,12 @@ const ZameenAceMallPage = () => {
         {/* Project Content That Changes Based on Active Slide */}
         <Grid container spacing={5} alignItems="center">
           <Grid item xs={12} md={6}>
-            <motion.div
+            {/* <motion.div
               key={`image-${activeSlide}`}
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-            >
+            > */}
               <Card sx={{ 
                 borderRadius: "15px", 
                 overflow: "hidden", 
@@ -231,15 +231,15 @@ const ZameenAceMallPage = () => {
                   alt={projectData[activeSlide].title}
                 />
               </Card>
-            </motion.div>
+            {/* </motion.div> */}
           </Grid>
           <Grid item xs={12} md={6}>
-            <motion.div
+            {/* <motion.div
               key={`content-${activeSlide}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-            >
+            > */}
               <Typography variant="h4" sx={{ fontWeight: "bold", mb: 2 }}>
                 {projectData[activeSlide].title}
               </Typography>
@@ -286,7 +286,7 @@ const ZameenAceMallPage = () => {
                   </Button>
                 )}
               </Box>
-            </motion.div>
+            {/* </motion.div> */}
           </Grid>
         </Grid>
       </Container>
@@ -317,7 +317,7 @@ const ZameenAceMallPage = () => {
             px: 2,
           }}
         >
-          <motion.div
+          {/* <motion.div
             initial={{ y: 150, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -333,125 +333,140 @@ const ZameenAceMallPage = () => {
               position: 'relative',
               zIndex: 1,
             }}
-          >
-            <Typography
-              variant="h5"
+          > */}
+            <Box
               sx={{
-                mb: 3,
-                fontWeight: "bold",
-                color: "#333",
-                textAlign: "center",
+                background: "rgba(255, 255, 255, 0.9)",
+                backdropFilter: "blur(15px)",
+                borderRadius: "12px",
+                padding: "30px",
+                maxWidth: "500px",
+                width: "100%",
+                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                color: "black",
+                position: 'relative',
+                zIndex: 1,
               }}
             >
-              Check Availability - Riverwalk
-            </Typography>
-
-            <form>
-              <TextField
-                select
-                label="Property Type"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                fullWidth
+              <Typography
+                variant="h5"
                 sx={{
-                  mb: 2,
-                  background: "white",
-                  borderRadius: "5px",
-                  "& .MuiInputBase-input": { color: "#333" },
+                  mb: 3,
+                  fontWeight: "bold",
+                  color: "#333",
+                  textAlign: "center",
                 }}
               >
-                {["1-Bed", "2-Bed", "3-Bed", "4-Bed (Penthouse)"].map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
+                Check Availability - Riverwalk
+              </Typography>
 
-              {/* Check-in & Check-out Fields in One Row */}
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <DatePicker
-                      label="Check-in Date"
-                      value={checkIn}
-                      onChange={(newValue) => setCheckIn(newValue)}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          fullWidth
-                          sx={{
-                            background: "white",
-                            borderRadius: "5px",
-                            "& .MuiInputBase-input": { color: "#333" },
-                          }}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <DatePicker
-                      label="Check-out Date"
-                      value={checkOut}
-                      onChange={(newValue) => setCheckOut(newValue)}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          fullWidth
-                          sx={{
-                            background: "white",
-                            borderRadius: "5px",
-                            "& .MuiInputBase-input": { color: "#333" },
-                          }}
-                        />
-                      )}
-                    />
-                  </Grid>
-                </Grid>
-              </LocalizationProvider>
-
-              <TextField
-                label="Preferred Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                fullWidth
-                sx={{
-                  mt: 2,
-                  background: "white",
-                  borderRadius: "5px",
-                  "& .MuiInputBase-input": { color: "#333" },
-                }}
-              />
-
-              {/* Buttons Row */}
-              <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-                <Button
-                  variant="outlined"
-                  onClick={() => setIsFormOpen(false)}
+              <form>
+                <TextField
+                  select
+                  label="Property Type"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  fullWidth
                   sx={{
-                    borderRadius: "20px",
-                    px: 3,
-                    borderColor: "#03A3E0",
-                    color: "#03A3E0",
-                    "&:hover": { backgroundColor: "#f0faff" },
+                    mb: 2,
+                    background: "white",
+                    borderRadius: "5px",
+                    "& .MuiInputBase-input": { color: "#333" },
                   }}
                 >
-                  Cancel
-                </Button>
-                <Button
-                  variant="contained"
+                  {["1-Bed", "2-Bed", "3-Bed", "4-Bed (Penthouse)"].map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                {/* Check-in & Check-out Fields in One Row */}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <DatePicker
+                        label="Check-in Date"
+                        value={checkIn}
+                        onChange={(newValue) => setCheckIn(newValue)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            fullWidth
+                            sx={{
+                              background: "white",
+                              borderRadius: "5px",
+                              "& .MuiInputBase-input": { color: "#333" },
+                            }}
+                          />
+                        )}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <DatePicker
+                        label="Check-out Date"
+                        value={checkOut}
+                        onChange={(newValue) => setCheckOut(newValue)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            fullWidth
+                            sx={{
+                              background: "white",
+                              borderRadius: "5px",
+                              "& .MuiInputBase-input": { color: "#333" },
+                            }}
+                          />
+                        )}
+                      />
+                    </Grid>
+                  </Grid>
+                </LocalizationProvider>
+
+                <TextField
+                  label="Preferred Location"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  fullWidth
                   sx={{
-                    background: "#03A3E0",
-                    borderRadius: "20px",
-                    px: 4,
-                    color: "white",
-                    "&:hover": { background: "#0282BE" },
+                    mt: 2,
+                    background: "white",
+                    borderRadius: "5px",
+                    "& .MuiInputBase-input": { color: "#333" },
                   }}
-                >
-                  Submit
-                </Button>
-              </Box>
-            </form>
-          </motion.div>
+                />
+
+                {/* Buttons Row */}
+                <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setIsFormOpen(false)}
+                    sx={{
+                      borderRadius: "20px",
+                      px: 3,
+                      borderColor: "#03A3E0",
+                      color: "#03A3E0",
+                      "&:hover": { backgroundColor: "#f0faff" },
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      background: "#03A3E0",
+                      borderRadius: "20px",
+                      px: 4,
+                      color: "white",
+                      "&:hover": { background: "#0282BE" },
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+              </form>
+            </Box>
+          {/* </motion.div> */}
         </Box>
       </Modal>
     </LocalizationProvider>
