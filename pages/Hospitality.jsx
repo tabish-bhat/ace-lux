@@ -12,13 +12,41 @@ import {
   Card,
   CardMedia,
   IconButton,
+  ImageList,
+  ImageListItem,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import backgroundImage from "../src/assets/project4.png";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
 import riverwalk from "../src/assets/hero3.jpeg";
+
+// Import river-walk images individually
+import img1 from "../src/assets/river-walk/img (1).jpeg";
+import img2 from "../src/assets/river-walk/img (2).jpeg";
+import img3 from "../src/assets/river-walk/img (3).jpeg";
+import img4 from "../src/assets/river-walk/img (4).jpeg";
+import img5 from "../src/assets/river-walk/img (5).jpeg";
+import img6 from "../src/assets/river-walk/img (6).jpeg";
+import img7 from "../src/assets/river-walk/img (7).jpeg";
+import img8 from "../src/assets/river-walk/img (8).jpeg";
+import img9 from "../src/assets/river-walk/img (9).jpeg";
+import img10 from "../src/assets/river-walk/img (10).jpeg";
+import img11 from "../src/assets/river-walk/img (11).jpeg";
+import img12 from "../src/assets/river-walk/img (12).jpeg";
+import img13 from "../src/assets/river-walk/img (13).jpeg";
+import img14 from "../src/assets/river-walk/img (14).jpeg";
+import img15 from "../src/assets/river-walk/img (15).jpeg";
+import img16 from "../src/assets/river-walk/img (16).jpeg";
+
+const riverWalkImages = [
+  img1, img2, img3, img4, img5, img6, img7, img8,
+  img9, img10, img11, img12, img13, img14, img15, img16
+];
 
 const ZameenAceMallPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -27,6 +55,7 @@ const ZameenAceMallPage = () => {
   const [checkOut, setCheckOut] = useState(null);
   const [location, setLocation] = useState("");
   const [activeSlide, setActiveSlide] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Combined data for carousel items and their corresponding detailed content
   const projectData = [
@@ -469,6 +498,86 @@ const ZameenAceMallPage = () => {
           {/* </motion.div> */}
         </Box>
       </Modal>
+
+      {/* Gallery Section */}
+      <Box sx={{ py: 10, backgroundColor: '#f5f5f5' }}>
+        <Container>
+          <Typography variant="h4" sx={{ fontWeight: "bold", mb: 6, textAlign: "center" }}>
+            Riverwalk Gallery
+          </Typography>
+          <Grid container spacing={2}>
+            {riverWalkImages.map((item, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Box
+                  onClick={() => setSelectedImage(item)}
+                  sx={{
+                    position: 'relative',
+                    paddingTop: '75%', // 4:3 aspect ratio
+                    overflow: 'hidden',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    transition: 'transform 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'scale(1.02)',
+                    },
+                  }}
+                >
+                  <img
+                    src={item}
+                    alt={`Riverwalk ${index + 1}`}
+                    loading="lazy"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Image Preview Dialog */}
+      <Dialog
+        open={Boolean(selectedImage)}
+        onClose={() => setSelectedImage(null)}
+        maxWidth="lg"
+        fullWidth
+      >
+        <DialogContent sx={{ p: 0, position: 'relative' }}>
+          <IconButton
+            onClick={() => setSelectedImage(null)}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: 'white',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              },
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Full size preview"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </LocalizationProvider>
   );
 };
