@@ -1,10 +1,11 @@
 //import React from "react";
-import { Box, Button, Container, Typography, Grid, Card, CardContent, CardMedia, IconButton } from "@mui/material";
+import { Box, Button, Container, Typography, Grid, Card, CardContent, CardMedia, IconButton, Dialog, DialogContent } from "@mui/material";
 import { motion } from "framer-motion";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useNavigate } from "react-router-dom";
 import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
+import CloseIcon from '@mui/icons-material/Close';
 import project1 from "../src/assets/project1.png";
 import project2 from "../src/assets/project2.png";
 import project4 from "../src/assets/project4.png";
@@ -17,6 +18,29 @@ import homebg from "../src/assets/hero.png";
 import logo_head from "../src/assets/logo-head.png";
 import ConsultationModalForm from "../components/layout/ConsultationModal";
 import { useState } from "react";
+
+// Import river-walk images
+import img1 from "../src/assets/river-walk/img (1).jpeg";
+import img2 from "../src/assets/river-walk/img (2).jpeg";
+import img3 from "../src/assets/river-walk/img (3).jpeg";
+import img4 from "../src/assets/river-walk/img (4).jpeg";
+import img5 from "../src/assets/river-walk/img (5).jpeg";
+import img6 from "../src/assets/river-walk/img (6).jpeg";
+import img7 from "../src/assets/river-walk/img (7).jpeg";
+import img8 from "../src/assets/river-walk/img (8).jpeg";
+import img9 from "../src/assets/river-walk/img (9).jpeg";
+import img10 from "../src/assets/river-walk/img (10).jpeg";
+import img11 from "../src/assets/river-walk/img (11).jpeg";
+import img12 from "../src/assets/river-walk/img (12).jpeg";
+import img13 from "../src/assets/river-walk/img (13).jpeg";
+import img14 from "../src/assets/river-walk/img (14).jpeg";
+import img15 from "../src/assets/river-walk/img (15).jpeg";
+import img16 from "../src/assets/river-walk/img (16).jpeg";
+
+const riverWalkImages = [
+  img1, img2, img3, img4, img5, img6, img7, img8,
+  img9, img10, img11, img12, img13, img14, img15, img16
+];
 
 const projects = [
   { id: "zameen-ace-mall", title: "Zameen ACE Mall", image: project4 },
@@ -40,6 +64,7 @@ const LandingPage = () => {
   };
   
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -187,6 +212,70 @@ const LandingPage = () => {
           </Grid>
         </Container>
       </Box>
+
+      {/* 🔹 GALLERY SECTION */}
+      <Box sx={{ bgcolor: "#f5f5f5", py: 10 }}>
+        <Container>
+          <Typography variant="h3" fontWeight="bold" textAlign="center" mb={5}>
+            Gallery
+          </Typography>
+          <Grid container spacing={4}>
+            {riverWalkImages.map((item, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <motion.div whileHover={{ scale: 1.05 }}>
+                  <Card sx={{ boxShadow: 3 }}>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={item}
+                      alt={`Gallery ${index + 1}`}
+                      onClick={() => setSelectedImage(item)}
+                      sx={{ cursor: 'pointer' }}
+                    />
+                  </Card>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Image Preview Dialog */}
+      <Dialog
+        open={Boolean(selectedImage)}
+        onClose={() => setSelectedImage(null)}
+        maxWidth="lg"
+        fullWidth
+      >
+        <DialogContent sx={{ p: 0, position: 'relative' }}>
+          <IconButton
+            onClick={() => setSelectedImage(null)}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: 'white',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              },
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Full size preview"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* 🔹 FOOTER */}
       <Box sx={{ bgcolor: "rgba(16,34,20,255)", color: "white", py: 6, textAlign: "center" }}>
