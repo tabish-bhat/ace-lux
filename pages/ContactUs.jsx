@@ -117,13 +117,13 @@ const ContactUs = () => {
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
                 <Phone sx={{ color: "#121212", mr: 2 }} />
                 <Typography variant="body1">
-                  <strong>Phone:</strong> +92-332-0432677
+                  <strong>Phone:</strong> +92-334-1887804
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
                 <Email sx={{ color: "#121212", mr: 2 }} />
                 <Typography variant="body1">
-                  <strong>Email:</strong> info@theaceluxe.com
+                  <strong>Email:</strong> sales@theaceluxe.com
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center">

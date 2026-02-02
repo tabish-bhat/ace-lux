@@ -17,7 +17,7 @@ import service3 from "../src/assets/remodling.jpeg";
 import homebg from "../src/assets/hero.png";
 import logo_head from "../src/assets/logo-head.png";
 import ConsultationModalForm from "../components/layout/ConsultationModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Import river-walk images
 import img1 from "../src/assets/river-walk/img (1).jpeg";
@@ -65,17 +65,30 @@ const LandingPage = () => {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Slideshow images - using different images
+  const slideshowImages = [homebg, project6, service1, project5];
+
+  // Auto-advance slideshow
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slideshowImages.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
     <Box sx={{ fontFamily: "Arial, sans-serif" }}>
-      {/* 🔹 HERO SECTION */}
+      {/* 🔹 HERO SECTION WITH SLIDESHOW */}
         <Box
           sx={{
             height: "100vh",
-            backgroundImage: `url(${homebg})`,
+            backgroundImage: `url(${slideshowImages[currentSlide]})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             display: "flex",
@@ -84,11 +97,43 @@ const LandingPage = () => {
             color: "#fee4c9",
             textAlign: "center",
             px: 3,
+            position: "relative",
+            transition: "background-image 1s ease-in-out",
           }}
         >
+          {/* Slideshow indicators */}
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 30,
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: 1,
+              zIndex: 10,
+            }}
+          >
+            {slideshowImages.map((_, index) => (
+              <Box
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor: currentSlide === index ? "#ff9800" : "rgba(255, 255, 255, 0.5)",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: currentSlide === index ? "#ff9800" : "rgba(255, 255, 255, 0.8)",
+                  },
+                }}
+              />
+            ))}
+          </Box>
           <Container>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-            <Typography
+            {/* <Typography
               variant="h2"
               fontWeight="bold"
               sx={{
@@ -106,7 +151,7 @@ const LandingPage = () => {
               }}
             >
               BY
-            </Typography>
+            </Typography> */}
             <Box
                 component="img"
                 src={logo_head} // Replace with the desired image path
@@ -288,7 +333,7 @@ const LandingPage = () => {
               { icon: <Facebook />, link: "https://www.facebook.com/share/1AHkB6s8VP/" },
               { icon: <Twitter />, link: "https://twitter.com" },
               { icon: <Instagram />, link: "https://www.instagram.com/theaceluxe" },
-              { icon: <LinkedIn />, link: "https://linkedin.com" },
+              { icon: <LinkedIn />, link: "https://linkedin.com/company/ace-luxe/" },
             ].map((social, index) => (
               <IconButton
                 key={index}

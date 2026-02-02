@@ -7,14 +7,13 @@ import {
   Typography,
   Menu,
   Container,
-  Avatar,
   Button,
-  Tooltip,
   MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { motion } from "framer-motion";
-import logo from "../../src/assets/logo1.jpeg";
+// import logo from "../../src/assets/logo1.jpeg";
+import logo from "../../src/assets/logo-trans.png";
 import { useNavigate } from "react-router-dom";
 
 const pages = [
@@ -25,12 +24,9 @@ const pages = [
   { name: "Projects", path: "/projects" },
 ];
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
 function ResponsiveAppBar() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
@@ -42,9 +38,7 @@ function ResponsiveAppBar() {
   }, []);
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
-  const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
-  const handleCloseUserMenu = () => setAnchorElUser(null);
 
   const handleNavigate = (path) => {
     navigate(path);
@@ -70,11 +64,11 @@ function ResponsiveAppBar() {
           }}
         >
           {/* Mobile: Hamburger Left, Logo Center */}
-          <Box sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", flexGrow: 1 }}>
+          <Box sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", width: "100%" }}>
             <IconButton size="large" onClick={handleOpenNavMenu} sx={{ color: scrolling ? "white" : "white" }}>
               <MenuIcon sx={{ fontSize: "2rem" }} />
             </IconButton>
-            <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <Box sx={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
               <img src={logo} alt="Logo" style={{ height: "50px", cursor: "pointer" }} onClick={() => navigate("/")} />
             </Box>
           </Box>
@@ -105,36 +99,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          {/* Profile Avatar */}
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{
-                mt: "45px",
-                "& .MuiPaper-root": {
-                  backgroundColor: "rgba(0, 0, 0, 0.9)",
-                  color: "white",
-                  backdropFilter: "blur(12px)",
-                  borderRadius: "10px",
-                },
-              }}
-              anchorEl={anchorElUser}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" sx={{ fontWeight: "bold", color: "white" }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+
 
           {/* Mobile Dropdown Menu */}
           <Menu

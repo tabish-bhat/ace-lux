@@ -8,22 +8,31 @@ import {
   Box,
   Typography,
   Grid,
+  IconButton,
 } from "@mui/material";
+import { Add, Remove } from "@mui/icons-material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import PropTypes from "prop-types";
 
 const ConsultationModalForm = ({ open, handleClose }) => {
-  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+  const [propertyType, setPropertyType] = useState("");
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
-  const [location, setLocation] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", { category, checkIn, checkOut, location });
+    console.log("Form submitted:", { location, propertyType, adults, children, checkIn, checkOut });
     handleClose();
   };
+
+  const incrementAdults = () => setAdults(prev => prev + 1);
+  const decrementAdults = () => setAdults(prev => Math.max(1, prev - 1));
+  const incrementChildren = () => setChildren(prev => prev + 1);
+  const decrementChildren = () => setChildren(prev => Math.max(0, prev - 1));
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -64,11 +73,12 @@ const ConsultationModalForm = ({ open, handleClose }) => {
           </Typography>
 
           <form onSubmit={handleSubmit}>
+            {/* Location Dropdown */}
             <TextField
               select
-              label="Property Type"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              label="Location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               fullWidth
               sx={{
                 mb: 2,
@@ -77,13 +87,94 @@ const ConsultationModalForm = ({ open, handleClose }) => {
                 "& .MuiInputBase-input": { color: "#333" },
               }}
             >
-              {["1-Bed", "2-Bed", "3-Bed", "4-Bed (Penthouse)"].map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
+              <MenuItem value="Skyhouse">Skyhouse</MenuItem>
+              <MenuItem value="Viceroy House" disabled>Viceroy House</MenuItem>
+              <MenuItem value="Elevens" disabled>Elevens</MenuItem>
             </TextField>
 
+            {/* Property Type Dropdown */}
+            <TextField
+              select
+              label="Property Type"
+              value={propertyType}
+              onChange={(e) => setPropertyType(e.target.value)}
+              fullWidth
+              sx={{
+                mb: 2,
+                background: "white",
+                borderRadius: "5px",
+                "& .MuiInputBase-input": { color: "#333" },
+              }}
+            >
+              <MenuItem value="Single room">Single room</MenuItem>
+              <MenuItem value="Penthouse">Penthouse</MenuItem>
+            </TextField>
+
+            {/* Guests Section - Adults and Children on same line */}
+            <Box sx={{ mb: 2 }}>
+              <Typography variant="body2" sx={{ mb: 1, color: "#666" }}>
+                Guests
+              </Typography>
+              <Grid container spacing={2}>
+                {/* Adults */}
+                <Grid item xs={6}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      background: "white",
+                      borderRadius: "5px",
+                      border: "1px solid rgba(0, 0, 0, 0.23)",
+                      p: 1,
+                    }}
+                  >
+                    <Typography variant="body2" sx={{ color: "#333", flexGrow: 1 }}>
+                      Adults
+                    </Typography>
+                    <IconButton onClick={decrementAdults} size="small">
+                      <Remove fontSize="small" />
+                    </IconButton>
+                    <Typography variant="body1" sx={{ mx: 2, color: "#333", minWidth: "20px", textAlign: "center" }}>
+                      {adults}
+                    </Typography>
+                    <IconButton onClick={incrementAdults} size="small">
+                      <Add fontSize="small" />
+                    </IconButton>
+                  </Box>
+                </Grid>
+
+                {/* Children */}
+                <Grid item xs={6}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      background: "white",
+                      borderRadius: "5px",
+                      border: "1px solid rgba(0, 0, 0, 0.23)",
+                      p: 1,
+                    }}
+                  >
+                    <Typography variant="body2" sx={{ color: "#333", flexGrow: 1 }}>
+                      Children
+                    </Typography>
+                    <IconButton onClick={decrementChildren} size="small">
+                      <Remove fontSize="small" />
+                    </IconButton>
+                    <Typography variant="body1" sx={{ mx: 2, color: "#333", minWidth: "20px", textAlign: "center" }}>
+                      {children}
+                    </Typography>
+                    <IconButton onClick={incrementChildren} size="small">
+                      <Add fontSize="small" />
+                    </IconButton>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+
+            {/* Check-in and Check-out Dates */}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -124,19 +215,6 @@ const ConsultationModalForm = ({ open, handleClose }) => {
                 </Grid>
               </Grid>
             </LocalizationProvider>
-
-            <TextField
-              label="Preferred Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              fullWidth
-              sx={{
-                mt: 2,
-                background: "white",
-                borderRadius: "5px",
-                "& .MuiInputBase-input": { color: "#333" },
-              }}
-            />
 
             <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
               <Button
